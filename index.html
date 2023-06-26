@@ -22,14 +22,15 @@
       var warnings = document.getElementsByClassName("message");
       var d = new Date();
       function errorMessage(e, message) {
+        warnings[e].style.display = "block";
         for (i = 0; i < 3; i++) {
           inputs[i].style.outline = "1px solid var(--light-red)";
           labels[i].style.color = "var(--light-red)";
-          warnings[i].style.display = "block";
         }
         warnings[e].innerHTML = message;
       }
-      function getDaysInMonth(year, month) {
+      function getDaysInMonth(days, year, month) {
+        
         return new Date(year, month-1, 0).getDate();
       }
 
@@ -37,7 +38,15 @@
         var days = document.getElementById("days");
         var months = document.getElementById("months");
         var years = document.getElementById("years");
-       
+        if (days.value == 0) {
+          errorMessage(0, "This field is required");
+        } 
+        else if (days.value > getDaysInMonth(days.value,years.value, months.value)) {
+          errorMessage(0, "Must be a valid day");
+        }
+        if(months.value>12 && days.value<=31) {
+          warnings[0].style.display = "none";
+        }
         if (months.value == 0) {
           errorMessage(1, "This field is required");
         } 
@@ -47,15 +56,7 @@
         else {
           warnings[1].style.display = "none";
         }
-        if (days.value == 0) {
-          errorMessage(0, "This field is required");
-        } 
-        else if (days.value > getDaysInMonth(years.value, months.value)) {
-          errorMessage(0, "Must be a valid day");
-        }
-        else {
-          warnings[0].style.display = "none";
-        }
+        
         if (years.value == 0) {
           errorMessage(2, "This field is required");
         } 
