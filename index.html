@@ -22,16 +22,15 @@
       var warnings = document.getElementsByClassName("message");
       var d = new Date();
       function errorMessage(e, message) {
-        warnings[e].style.display = "block";
         for (i = 0; i < 3; i++) {
           inputs[i].style.outline = "1px solid var(--light-red)";
           labels[i].style.color = "var(--light-red)";
+          warnings[i].style.display = "block";
         }
         warnings[e].innerHTML = message;
       }
-      function getDaysInMonth(days, year, month) {
-        
-        return new Date(year, month-1, 0).getDate();
+      function getDaysInMonth(year, month) {
+        return new Date(year, month, 0).getDate();
       }
 
       function calc() {
@@ -40,28 +39,33 @@
         var years = document.getElementById("years");
         if (days.value == 0) {
           errorMessage(0, "This field is required");
-        } 
-        else if (days.value > getDaysInMonth(days.value,years.value, months.value)) {
-          errorMessage(0, "Must be a valid day");
-        }
-        if(months.value>12 && days.value<=31) {
+        } else {
           warnings[0].style.display = "none";
         }
         if (months.value == 0) {
           errorMessage(1, "This field is required");
-        } 
-        else if (months.value > 12) {
+        } else {
+          warnings[1].style.display = "none";
+        }
+        if (years.value == 0) {
+          errorMessage(2, "This field is required");
+        } else {
+          warnings[2].style.display = "none";
+        }
+        if (years.value > d.getFullYear()) {
+          errorMessage(2, "Must be in the past");
+        }
+        else {
+          warnings[2].style.display = "none";
+        }
+        if (months.value > 12) {
           errorMessage(1, "Must be a valid month");
         }
         else {
-          warnings[1].style.display = "none";
+          warnings[2].style.display = "none";
         }
-        
-        if (years.value == 0) {
-          errorMessage(2, "This field is required");
-        } 
-        else if (years.value > d.getFullYear()) {
-          errorMessage(2, "Must be in the past");
+        if (days.value > getDaysInMonth(years.value, months.value)) {
+          errorMessage(0, "Must be a valid day");
         }
         else {
           warnings[2].style.display = "none";
