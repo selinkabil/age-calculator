@@ -21,12 +21,16 @@ function calc() {
 
   if (days.value == 0) {
     errorMessage(0, "This field is required");
+  } else if (days.value > getDaysInMonth(years.value, months.value)) {
+    errorMessage(0, "Must be a valid day");
   } else {
     warnings[0].style.display = "none";
   }
 
   if (months.value == 0) {
     errorMessage(1, "This field is required");
+  }else if (months.value > 12) {
+    errorMessage(1, "Must be a valid month");
   } else {
     warnings[1].style.display = "none";
   }
@@ -37,18 +41,6 @@ function calc() {
     errorMessage(2, "Must be in the past");
   } else {
     warnings[2].style.display = "none";
-  }
-
-  if (months.value > 12) {
-    errorMessage(1, "Must be a valid month");
-  } else {
-    warnings[1].style.display = "none";
-  }
-
-  if (days.value > getDaysInMonth(years.value, months.value)) {
-    errorMessage(0, "Must be a valid day");
-  } else {
-    warnings[0].style.display = "none";
   }
 
   if (
