@@ -91,4 +91,10 @@ function calc() {
     answer[1].innerHTML = monthsDiff;
     answer[2].innerHTML = daysDiff;
   }
+  else{
+    var answer = document.getElementsByClassName("answer");
+    answer[0].innerHTML = "--";
+    answer[1].innerHTML = "--";
+    answer[2].innerHTML = "--";
+  }
 }
