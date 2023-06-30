@@ -48,10 +48,7 @@ Users should be able to:
 - CSS Grid
 
 ### What I learned
-
--Basic Javascript Form validation
--Javascript Time and Date Manipulation
--Using the :focus selector
+- Basic Javascript Form validation
 
 
 ```js
@@ -61,12 +58,12 @@ if (days.value == 0) {
           warnings[0].style.display = "none";
         }
 ```
-
+- Javascript Time and Date Manipulation
 ```js
 var secondsInYear = 365.25 * 24 * 60 * 60; 
 var years = Math.floor(timeDiff / (1000 * secondsInYear));
 ```
-
+- Using the :focus selector
 ```css
 
 input:focus {
